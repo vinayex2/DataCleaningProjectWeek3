@@ -1,18 +1,5 @@
-##################################################################################
-### Run analysis 
-### CREATED BY : Kannan Sundararaman 
-###  - for coursera Getting and Cleaning data - signature track - data science.
-##################################################################################
-## setwd("K:/COURSERA/CLEAN")  -- set working directory 
-##################################################################################
 
-##################################################################################
-### step 1 : Merging the training and test dataset into one dataset 
-##            Read testdata, train data all X, Y and the subject 
-##            merging it into a single ataset with 563 variables and 10299 observations
-
-#################################
-##   reading the test data set  3 Files 
+##   Script for Analysis
 
 folder <- "UCI HAR Dataset/test/"
 file <- paste(folder, "X_test.txt", sep="")
@@ -38,15 +25,10 @@ all[, "subject"] <- rbind(testsub, trainsub)      ## subject added
 
 ##################################################################################
 ### step 2 : Extracts only the measurements on the mean and standard deviation for each measurement. 
-##            Read features and filter the data frame to eleminate variable names 
-##            other than mean & std. add the column names for activity labels and subject
-##            create a logical vector to filter the dataframe
-##            using logical vector filter the data frame features to get a filtered data frame
-##            using the filtered dataframe and apply it to the all data frame to get the 
-##            allmeanstd dataframe 
+
 ##################################################################################
 
-######  -- loading the features and filtering for mean and standard deviation
+
 file <- "UCI HAR Dataset/features.txt"
 features <- read.table(file, stringsAsFactors=FALSE)  ## loading features df
 features <- rbind(features, list(562, "activity.labels")) ## adding activity labels name to 562nd subscript
@@ -67,9 +49,7 @@ allmeanstd <- all[f1[[1]]]  ##  all mean and std observations alone seperated an
 
 ##################################################################################
 ### step 3 & 4 : cleaning up the loaded names and apply the names to the column names
-##                of allmeanstd and merge them to the descriptive data set of activity names
-#3                at end produces the data frame allmeanstd with names and activity names.
-##            
+##    #            
 ##################################################################################
 
 ##############################################
@@ -108,13 +88,6 @@ final <- merge(alab, allmeanstd, by.x="activity.label", by.y="activity.labels")
 ### step 5 : Creates a second, independent tidy data set with the average of 
 ##           each variable for each activity and each subject.
 ##           
-##           dataset used further is called final  which is the result of last expression
-##           other datasets are not required for further activity
-## 
-##           a) using the allmeanstd and reshape2 library 
-##           b) using melt making it narrow dataset
-##           c) it can be used further to generate a wide tidy dataset 
-##           d) or narrow tidy dataset
 ##################################################################################
 
 
